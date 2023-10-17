@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
@@ -8,16 +6,16 @@ public class GroundDetector : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, 1))
-        Debug.DrawRay(transform.position, Vector3.down, Color.green);
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Floor"))
-        { 
+        // Realiza un Raycast hacia abajo
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1))
+        {
             grounded = true;
+            Debug.DrawRay(transform.position, Vector3.down, Color.green);
+        }
+        else
+        {
+            grounded = false;
+            Debug.DrawRay(transform.position, Vector3.down, Color.red); // Dibuja un rayo rojo si no colisiona con nada
         }
     }
 }
