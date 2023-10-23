@@ -2,16 +2,47 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    [SerializeField] private Camera PlayerCam;
+    [SerializeField] private LayerMask pickUpLayerMask;
+    [SerializeField] private Transform objectGrabPointTransform;
+    [SerializeField] private Transform PickupTarget;
+    [SerializeField] private float PickupRange;
+    private Rigidbody CurrentObject;
+
+    void Update()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            if (CurrentObject)
+            {
+                CurrentObject.freezeRotation = false;
+                CurrentObject.useGravity = true;
+                CurrentObject = null;
+                return;
+            }
+
+            Ray CameraRay = PlayerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            if (Physics.Raycast(CameraRay, out RaycastHit HitInfo, PickupRange, pickUpLayerMask))
+            {
+                Debug.DrawRay(transform.position, transform.forward, Color.green);
+                CurrentObject = HitInfo.rigidbody;
+                CurrentObject.useGravity = false;
+                CurrentObject.freezeRotation = true;
+            }
+            else
+            {
+                Debug.DrawRay(transform.position, transform.forward, Color.red);
+            }
+        }
+    }
     void FixedUpdate()
     {
-        // Realiza un Raycast hacia adelante y comprueba si colisiona con un objeto con el tag "Pickup"
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1) && hit.collider.CompareTag("Pickup"))
+        if (CurrentObject)
         {
-            Debug.DrawRay(transform.position, transform.forward, Color.green);
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.forward, Color.red); // Dibuja un rayo rojo si no colisiona con "Pickup"
+            Vector3 DirectionToPoint = PickupTarget.position - CurrentObject.position;
+            float DistanceToPoint = DirectionToPoint.magnitude;
+
+            CurrentObject.velocity = DirectionToPoint * 12f * DistanceToPoint;
         }
     }
 }
