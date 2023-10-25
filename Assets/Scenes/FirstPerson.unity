@@ -611,7 +611,6 @@ GameObject:
   - component: {fileID: 660746944}
   - component: {fileID: 660746943}
   - component: {fileID: 660746947}
-  - component: {fileID: 660746948}
   m_Layer: 6
   m_Name: Pickup
   m_TagString: Pickup
@@ -715,7 +714,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660746942}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.05
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -734,18 +733,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &660746948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660746942}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5344497ceaf0cf4494b70377b09eae4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &976286365
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +873,6 @@ GameObject:
   - component: {fileID: 1528923969}
   - component: {fileID: 1528923968}
   - component: {fileID: 1528923967}
-  - component: {fileID: 1528923972}
   m_Layer: 6
   m_Name: Pickup (1)
   m_TagString: Pickup
@@ -902,7 +888,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528923966}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.05
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1009,18 +995,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1528923972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528923966}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5344497ceaf0cf4494b70377b09eae4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1595642411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,8 +1663,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2063239318}
-  - component: {fileID: 2063239319}
-  - component: {fileID: 2063239320}
+  - component: {fileID: 2063239321}
   m_Layer: 0
   m_Name: PickupCenter
   m_TagString: Untagged
@@ -1706,14 +1679,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063239317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.137, z: 1.024}
+  m_LocalPosition: {x: 0.186, y: -0.449, z: 0.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 436237834}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2063239319
+--- !u!114 &2063239321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1722,33 +1695,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2063239317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21a6ec22fe37b6246b0f4424bb7c24d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 561f22bfd1d0652468dd1579b14db355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerCam: {fileID: 436237833}
+  holdArea: {fileID: 2063239318}
   pickUpLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  objectGrabPointTransform: {fileID: 2063239318}
-  PickupTarget: {fileID: 2063239318}
-  PickupRange: 2
---- !u!114 &2063239320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063239317}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dbb9f54dbc1bbf4799f555ad257f054, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectGrabPointTransform: {fileID: 2063239318}
-  pickUpLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  pickUpdistance: 2
+  pickupRange: 5
+  pickupForce: 150
 --- !u!1 &2075544874
 GameObject:
   m_ObjectHideFlags: 0

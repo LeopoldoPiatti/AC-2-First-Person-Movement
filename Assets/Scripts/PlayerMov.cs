@@ -11,24 +11,17 @@ public class PlayerMov : MonoBehaviour
 
     void Start()
     {
-        groundDetector = GetComponent<GroundDetector>(); // Obtén el componente GroundDetector
+        groundDetector = GetComponent<GroundDetector>(); 
     }
 
     void Update()
     {
-        if (groundDetector != null && groundDetector.grounded) // Solo permite mover al jugador si está en el suelo
-        {
-            // Obtén el movimiento del ratón del eje X
-            float mouseX = Input.GetAxis("Mouse X");
-
-            // Calcula la rotación del cuerpo
-            Quaternion cuerpoRotation = Quaternion.Euler(0f, mouseX * playerRotationSpeed, 0f);
-
-            // Aplica la rotación al cuerpo
+        if (groundDetector != null && groundDetector.grounded) 
+        {            
+            float mouseX = Input.GetAxis("Mouse X");                   
+            Quaternion cuerpoRotation = Quaternion.Euler(0f, mouseX * playerRotationSpeed, 0f);            
             Quaternion newRotation = transform.rotation * cuerpoRotation;
-
             transform.rotation = newRotation;
-
             deltaMove = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * moveSpeed * Time.deltaTime;
             player.transform.Translate(deltaMove);
         }

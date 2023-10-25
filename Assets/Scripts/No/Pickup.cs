@@ -9,9 +9,9 @@ public class Pickup : MonoBehaviour
     [SerializeField] private float PickupRange;
     private Rigidbody CurrentObject;
 
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetMouseButton(1))
         {
             if (CurrentObject)
             {
@@ -24,19 +24,16 @@ public class Pickup : MonoBehaviour
             Ray CameraRay = PlayerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
             if (Physics.Raycast(CameraRay, out RaycastHit HitInfo, PickupRange, pickUpLayerMask))
             {
-                Debug.DrawRay(transform.position, transform.forward, Color.green);
+                Debug.DrawRay(CameraRay.origin, CameraRay.direction * PickupRange, Color.green);
                 CurrentObject = HitInfo.rigidbody;
                 CurrentObject.useGravity = false;
                 CurrentObject.freezeRotation = true;
             }
             else
             {
-                Debug.DrawRay(transform.position, transform.forward, Color.red);
+                Debug.DrawRay(CameraRay.origin, CameraRay.direction * PickupRange, Color.red);
             }
         }
-    }
-    void FixedUpdate()
-    {
         if (CurrentObject)
         {
             Vector3 DirectionToPoint = PickupTarget.position - CurrentObject.position;
@@ -46,4 +43,5 @@ public class Pickup : MonoBehaviour
         }
     }
 }
+
 
